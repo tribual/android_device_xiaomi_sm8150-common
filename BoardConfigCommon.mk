@@ -76,7 +76,7 @@ BOARD_HAVE_QCOM_FM := true
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     $(COMMON_PATH)/framework_compatibility_matrix.xml \
-    vendor/lineage/config/device_framework_matrix.xml
+    vendor/spark/config/device_framework_matrix.xml
 DEVICE_MATRIX_FILE += $(COMMON_PATH)/compatibility_matrix.xml
 DEVICE_MANIFEST_FILE += $(COMMON_PATH)/manifest.xml
 ODM_MANIFEST_SKUS += nfc nfc_ese
@@ -149,7 +149,7 @@ BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := $(ALL_PARTITIONS)
 ifneq ($(WITH_GMS),true)
 $(foreach p, $(call to-upper, $(SSI_PARTITIONS)), \
     $(eval BOARD_$(p)IMAGE_EXTFS_INODE_COUNT := -1))
-SSI_PARTITIONS_RESERVED_SIZE := 1258291200
+SSI_PARTITIONS_RESERVED_SIZE := 734003200
 else
 SSI_PARTITIONS_RESERVED_SIZE := 30720000
 endif
