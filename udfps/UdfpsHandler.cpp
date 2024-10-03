@@ -112,6 +112,7 @@ class XiaomiMsmnileUdfpsHandler : public UdfpsHandler {
     void cancel() {
         // nothing
     }
+
   private:
     fingerprint_device_t *mDevice;
 };

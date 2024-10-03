@@ -62,6 +62,7 @@ TARGET_BOOTLOADER_BOARD_NAME := msmnile
 TARGET_NO_BOOTLOADER := true
 
 # Display
+TARGET_GRALLOC_HANDLE_HAS_RESERVED_SIZE := true
 TARGET_DISABLED_UBWC := true
 TARGET_USES_COLOR_METADATA := true
 TARGET_USES_DISPLAY_RENDER_INTENTS := true
@@ -111,6 +112,8 @@ TARGET_KERNEL_CONFIG := \
     vendor/debugfs.config \
     vendor/xiaomi/sm8150-common.config
 
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 134217728
@@ -127,7 +130,6 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 endif # !TARGET_IS_LEGACY
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 endif # TARGET_IS_VAB
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 114898743296
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 BOARD_USES_METADATA_PARTITION := true
 
@@ -246,7 +248,7 @@ endif
 # VINTF
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     $(COMMON_PATH)/framework_compatibility_matrix.xml \
-    vendor/lineage/config/device_framework_matrix.xml
+    vendor/yaap/config/device_framework_matrix.xml
 DEVICE_MANIFEST_FILE += $(COMMON_PATH)/manifest.xml
 ifeq ($(TARGET_HAS_FM),true)
 DEVICE_MANIFEST_FILE += $(COMMON_PATH)/manifest_fm.xml
@@ -257,6 +259,7 @@ endif
 DEVICE_MATRIX_FILE += $(COMMON_PATH)/compatibility_matrix.xml
 ODM_MANIFEST_SKUS += nfc
 ODM_MANIFEST_NFC_FILES := $(COMMON_PATH)/manifest_nfc.xml
+DEVICE_MATRIX_FILE := hardware/qcom-caf/common//compatibility_matrix.xml
 
 # Wi-Fi
 BOARD_WLAN_DEVICE := qcwcn
@@ -274,3 +277,5 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit the proprietary files
 include vendor/xiaomi/sm8150-common/BoardConfigVendor.mk
+
+SELINUX_IGNORE_NEVERALLOWS := true

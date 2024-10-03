@@ -87,15 +87,16 @@ endif
 
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio@6.0-impl \
-    android.hardware.audio.effect@6.0-impl \
+    android.hardware.audio@7.1-impl \
+    android.hardware.audio.effect@7.0-impl \
     android.hardware.audio.service \
     android.hardware.bluetooth.audio-impl \
-    android.hardware.soundtrigger@2.2-impl
+    android.hardware.soundtrigger@2.2-impl \
+    android.hardware.soundtrigger@2.3-impl
 
 PRODUCT_PACKAGES += \
     audio.bluetooth.default \
-    audio.primary.msmnile \
+    audio.primary.default \
     audio.r_submix.default \
     audio.usb.default
 
@@ -206,7 +207,8 @@ PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.4.vendor
+    android.hardware.drm@1.4.vendor \
+    libcrypto-v33
 
 # fastbootd
 PRODUCT_PACKAGES += \
@@ -302,6 +304,7 @@ PRODUCT_PACKAGES += \
 # Media
 PRODUCT_PACKAGES += \
     libavservices_minijail \
+    libavservices_minijail_32 \
     libavservices_minijail.vendor \
     libavservices_minijail_vendor \
     libcodec2_hidl@1.0.vendor \
@@ -359,6 +362,7 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVenc \
+    libstagefright_softomx_plugin.vendor \
     libstagefrighthw
 
 # Overlays
@@ -385,6 +389,8 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/google/pixel \
     hardware/lineage/interfaces/power-libperfmgr \
     hardware/qcom-caf/common/libqti-perfd-client
+
+TARGET_PROVIDES_POWERHAL := true
 
 # Public libraries
 PRODUCT_COPY_FILES += \
@@ -457,19 +463,6 @@ PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/xiaomi
 
-# Telephony
-PRODUCT_PACKAGES += \
-    ims-ext-common \
-    ims_ext_common.xml \
-    qti-telephony-hidl-wrapper \
-    qti_telephony_hidl_wrapper.xml \
-    qti-telephony-utils \
-    qti_telephony_utils.xml \
-    telephony-ext
-
-PRODUCT_BOOT_JARS += \
-    telephony-ext
-
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.3-service.dual_role_usb
@@ -484,6 +477,7 @@ $(call inherit-product, vendor/qcom/opensource/vibrator/vibrator-vendor-product.
 # Wi-Fi
 PRODUCT_PACKAGES += \
     android.hardware.wifi-service \
+    android.media.audio.common.types-V2-cpp \
     hostapd \
     libwpa_client \
     libwifi-hal-ctrl \
@@ -514,3 +508,7 @@ PRODUCT_BOOT_JARS += \
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/xiaomi/sm8150-common/sm8150-common-vendor.mk)
+
+# Logging
+PRODUCT_PACKAGES += \
+    logcat.rc
